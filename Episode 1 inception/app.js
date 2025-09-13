@@ -117,7 +117,7 @@ const resList = [
     image: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg",
   },
   {
-    id: 10,
+    id: 10,    
     name: "Wow! Momo",
     cuisines: ["Momos", "Chinese", "Snacks"],
     rating: "4.1 stars",
