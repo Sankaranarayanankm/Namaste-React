@@ -1,12 +1,14 @@
 import RestaurantCard from "./RestaurentCard";
 import Shimmer from "./Shimmer";
 import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
-
+  const navigate = useNavigate();
+  console.log(Link);
   useEffect(() => {
     fetchData();
   }, []);
@@ -64,7 +66,12 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filteredRestaurant.map((item) => (
-          <RestaurantCard resData={item.info} key={item.info.id} />
+          <div
+            onClick={() => navigate(`/restaurants/${item.info.id}`)}
+            key={item.info.id}
+          >
+            <RestaurantCard resData={item.info} />
+          </div>
         ))}
       </div>
     </div>

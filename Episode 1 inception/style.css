@@ -83,10 +83,8 @@
   margin: 10px;
 }
 
-/* FOR RESPONSIVNESS */
-@media (max-width: 500px) {
-  .nav-items > ul {
-    flex-direction: column;
-    gap: 0.8rem;
-  }
+.user-card {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid black;
 }
