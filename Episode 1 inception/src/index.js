@@ -1,25 +1,38 @@
 import ReactDOM from "react-dom/client";
+import { lazy, Suspense } from "react";
 import AppLayout from "./AppLayout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import About from "./components/About";
-import Contact from "./components/Contact";
 import Error from "./components/ErrorPage";
 import Body from "./components/Body";
 import RestaurantMenu from "./components/RestaurantMenu";
+
+const About = lazy(() => import("./components/About"));
+const Contact = lazy(() => import("./components/Contact"));
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
     children: [
-      { path: "/", element: <Body /> },
+      {
+        path: "/",
+        element: <Body />,
+      },
       {
         path: "/about",
-        element: <About />,
+        element: (
+          <Suspense fallback={<h1>Loading..</h1>}>
+            <About />
+          </Suspense>
+        ),
       },
       {
         path: "/contact",
-        element: <Contact />,
+        element: (
+          <Suspense fallback={<h1>Loading..</h1>}>
+            <Contact />
+          </Suspense>
+        ),
       },
       {
         path: "/restaurants/:resId",

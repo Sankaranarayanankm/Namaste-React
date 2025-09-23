@@ -1,29 +1,25 @@
 import RestaurantCard from "./RestaurentCard";
 import Shimmer from "./Shimmer";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
-  console.log(Link);
+
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.5743545&lng=88.3628734&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&collection=83639&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null"
     );
     const json = await data.json();
-    setListOfRestaurant(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilteredRestaurant(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+    setListOfRestaurant(json.data.cards.slice(3));
+    setFilteredRestaurant(json.data.cards.slice(3));
   };
   // conditional rendering
   return listOfRestaurant.length === 0 ? (
@@ -65,14 +61,17 @@ const Body = () => {
         </button>
       </div>
       <div className="res-container">
-        {filteredRestaurant.map((item) => (
-          <div
-            onClick={() => navigate(`/restaurants/${item.info.id}`)}
-            key={item.info.id}
-          >
-            <RestaurantCard resData={item.info} />
-          </div>
-        ))}
+        {filteredRestaurant.map((item) => {
+          const obj = item.card.card.info;
+          return (
+            <div
+              onClick={() => navigate(`/restaurants/${obj.id}`)}
+              key={obj.id}
+            >
+              <RestaurantCard resData={obj} />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
