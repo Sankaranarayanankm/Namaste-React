@@ -26,15 +26,16 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="flex">
+        <div className="p-1 m-2 ">
           <input
             type="text"
-            className="search-box"
+            className=" border-gray-500 border mr-3"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
           <button
+            className="px-2 py-1 bg-gray-600 rounded-sm text-white cursor-pointer  hover:text-gray-500 hover:bg-white hover:border-gray-600 hover:border transition-all"
             onClick={() => {
               const filteredRes = listOfRestaurant.filter((item) =>
                 item["info"]["name"]
@@ -47,24 +48,27 @@ const Body = () => {
             Search
           </button>
         </div>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            const filteredList = listOfRestaurant.filter((item) => {
-              return parseFloat(item.rating) > 4;
-            });
+        <div className="p-1">
+          <button
+            className="px-2 py-1 text-white bg-violet-500 hover:text-violet-500 hover:bg-white rounded  my-1 mt-2 hover:border hover:border-violet-500 transition-all cursor-pointer "
+            onClick={() => {
+              const filteredList = listOfRestaurant.filter((item) => {
+                return parseFloat(item.rating) > 4;
+              });
 
-            setFilteredRestaurant(filteredList);
-          }}
-        >
-          Top Rated Restaurant
-        </button>
+              setFilteredRestaurant(filteredList);
+            }}
+          >
+            Top Rated Restaurant
+          </button>
+        </div>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {filteredRestaurant.map((item) => {
           const obj = item.card.card.info;
           return (
             <div
+              className="p-2 m-2 border w-[250px] hover:shadow-gray-500 hover:shadow-lg cursor-pointer bg-gray-300 rounded-md"
               onClick={() => navigate(`/restaurants/${obj.id}`)}
               key={obj.id}
             >

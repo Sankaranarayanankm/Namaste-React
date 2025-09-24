@@ -5,17 +5,17 @@ const Header = () => {
   const [btnName, setBtnName] = useState("Login");
 
   return (
-    <div className="header">
-      <div className="logo-container">
-        <img className="logo" src={LOGO_URL} alt="App Logo" />
+    <div className="flex justify-between align-middle shadow-gray-400 shadow-sm">
+      <div>
+        <img className="w-24" src={LOGO_URL} alt="App Logo" />
       </div>
-      <div className="nav-items">
-        <ul>
+      <div>
+        <ul className="flex gap-3 p-8 ">
           <li>
             <NavLink
-              style={({ isActive }) => ({
-                textDecoration: isActive ? "underline" : "none",
-              })}
+              className={({ isActive }) =>
+                isActive ? "text underline text-gray-500" : "hover:underline"
+              }
               to="/"
             >
               Home
@@ -23,9 +23,9 @@ const Header = () => {
           </li>
           <li>
             <NavLink
-              style={({ isActive }) => ({
-                textDecoration: isActive ? "underline" : "none",
-              })}
+              className={({ isActive }) =>
+                isActive ? "text underline  text-gray-500" : "hover:underline"
+              }
               to="/about"
             >
               About Us
@@ -33,9 +33,9 @@ const Header = () => {
           </li>
           <li>
             <NavLink
-              style={({ isActive }) => ({
-                textDecoration: isActive ? "underline" : "none",
-              })}
+              className={({ isActive }) =>
+                isActive ? "text underline  text-gray-500" : "hover:underline"
+              }
               to="/contact"
             >
               Contact Us
