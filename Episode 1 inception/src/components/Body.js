@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurentCard";
+import RestaurantCard, { withRestarurantArea } from "./RestaurentCard";
 import Shimmer from "./Shimmer";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ const Body = () => {
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
-
+  const RestaurantCardWithArea = withRestarurantArea(RestaurantCard);
   useEffect(() => {
     fetchData();
   }, []);
@@ -72,7 +72,12 @@ const Body = () => {
               onClick={() => navigate(`/restaurants/${obj.id}`)}
               key={obj.id}
             >
-              <RestaurantCard resData={obj} />
+             
+              {obj.areaName == "Koramangala" ? (
+                <RestaurantCardWithArea resData={obj} />
+              ) : (
+                <RestaurantCard resData={obj} />
+              )}
             </div>
           );
         })}
