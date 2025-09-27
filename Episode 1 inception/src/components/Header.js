@@ -1,8 +1,10 @@
 import { LOGO_URL } from "../utls/constant";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
+  const cartItems = useSelector((store) => store.cart.items);
 
   return (
     <div className="flex justify-between align-middle shadow-gray-400 shadow-sm">
@@ -42,7 +44,16 @@ const Header = () => {
             </NavLink>
           </li>
 
-          <li>Cart</li>
+          <li className="font-bold ">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-gray-500 underline" : "hover:underline"
+              }
+              to="/cart"
+            >
+              Cart - {cartItems.length} items
+            </NavLink>
+          </li>
           <button
             onClick={() => setBtnName(btnName == "Login" ? "Logout" : "Login")}
             className="login-btn"
